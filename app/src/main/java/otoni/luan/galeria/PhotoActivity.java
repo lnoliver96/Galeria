@@ -1,9 +1,12 @@
 package otoni.luan.galeria;
 
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.ImageView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -15,6 +18,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 public class PhotoActivity extends AppCompatActivity {
+    String photoPath;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +35,14 @@ public class PhotoActivity extends AppCompatActivity {
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
+
+        Intent i = getIntent();
+        photoPath = i.getStringExtra("photo_path");
+
+        Bitmap bitmap = Util.getBitmap(photoPath);
+        ImageView imPhoto = findViewById(R.id.imPhoto);
+        imPhoto.setImageBitmap(bitmap);
+
     }
 
     @Override

@@ -1,5 +1,6 @@
 package otoni.luan.galeria;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Environment;
@@ -78,6 +79,9 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void startPhotoActivity(String s) {
+    public void startPhotoActivity(String photoPath) {
+        Intent i = new Intent(MainActivity.this,PhotoActivity.class);
+        i.putExtra("photo_path",photoPath);
+        startActivity(i);
     }
 }
