@@ -2,8 +2,10 @@ package otoni.luan.galeria;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -12,11 +14,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.FileProvider;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -24,12 +28,15 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-
+    static int RESULT_TAKE_PICTURE = 1;
+    String currentPhotoPath;
     List<String> photos = new ArrayList<>();
+
 
     MainAdapter mainAdapter;
     @Override
@@ -76,7 +83,26 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void dispatchTakePictureIntent() {
+        File f = null;
+        try{
+            f = createImageFile();
+        } catch(IOException e){
+            Toast.makeText(MainActivity.this,"Não foi possível criar arquivo",Toast.LENGTH_LONG).show();
+            return;
+        }
 
+        currentPhotoPath = f.getAbsolutePath();
+
+        if(f != null){
+            Uri fUri = FileProvider.getUriForFile(MainActivity.this,"otoni.luan.galeria.fileprovider",f);
+            Intent i = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            i.putExtra(MediaStore.EXTRA_OUTPUT,fUri);
+            startActivityForResult(i,RESULT_TAKE_PICTURE);
+
+        }
+    }
+
+    private File createImageFile() {
     }
 
     public void startPhotoActivity(String photoPath) {
