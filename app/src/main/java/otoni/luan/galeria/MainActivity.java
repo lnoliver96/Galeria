@@ -1,5 +1,5 @@
 package otoni.luan.galeria;
-
+import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -147,16 +147,16 @@ public class MainActivity extends AppCompatActivity {
         startActivity(i);
     }
 
-    private void checkForPermission(List<String> permissions) {
-        List<String> permissionNotGranted = new ArrayList<>();
-        for (String permission : permission : permissions){
+    private void checkForPermissions(List<String> permissions) {
+        List<String> permissionsNotGranted = new ArrayList<>();
+        for (String permission : permissions){
             if(!hasPermission(permission)) {
-                permisionsNotGranted.add(permission);
+                permissionsNotGranted.add(permission);
             }
         }
         if (Build.VERSION.SDK_INT>=Build.VERSION_CODES.M){
-            if (permissionNotGranted.size()>0){
-                requestPermissions(permissionNotGranted.toArray(new String[permissionsNotGranted.size()]),RESULT_REQUEST_PERMISSION);
+            if (permissionsNotGranted.size()>0){
+                requestPermissions(permissionsNotGranted.toArray(new String[permissionsNotGranted.size()]),RESULT_REQUEST_PERMISSION);
             }
         }
     }
@@ -192,4 +192,5 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         }
+    }
 }
