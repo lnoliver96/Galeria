@@ -64,15 +64,18 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         File dir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
         File[] files = dir.listFiles();
-        for(int i = 0; i < files.length;i++){
-            RecyclerView rvGallery = findViewById(R.id.rvGallery);
-            rvGallery.setAdapter(mainAdapter);
-
-            float w = getResources().getDimension(R.dimen.itemWidth);
-            int numberOfColumns = Util.calculateNoOfColumns(MainActivity.this,w);
-            GridLayoutManager gridLayoutManager = new GridLayoutManager(MainActivity.this, numberOfColumns);
-            rvGallery.setLayoutManager(gridLayoutManager);
+        for(int i = 0; i < files.length;i++) {
+            photos.add(files[i].getAbsolutePath());
         }
+        mainAdapter = new MainAdapter(MainActivity.this, photos);
+        RecyclerView rvGallery = findViewById(R.id.rvGallery);
+        rvGallery.setAdapter(mainAdapter);
+
+        float w = getResources().getDimension(R.dimen.itemWidth);
+        int numberOfColumns = Util.calculateNoOfColumns(MainActivity.this,w);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(MainActivity.this, numberOfColumns);
+        rvGallery.setLayoutManager(gridLayoutManager);
+
 
         List<String> permissions = new ArrayList<>();
         permissions.add(Manifest.permission.CAMERA);
