@@ -61,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        // tbMain deve ser considerado como a ActionBar padrão da tela
         Toolbar toolbar = findViewById(R.id.tbMain);
         setSupportActionBar(toolbar);
 
@@ -89,6 +90,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
         super.onCreateOptionsMenu(menu);
+        //cria um inflador de menu
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.main_activity_tb,menu);
         return true;

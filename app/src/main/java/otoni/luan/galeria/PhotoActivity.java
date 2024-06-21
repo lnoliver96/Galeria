@@ -29,9 +29,13 @@ public class PhotoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_photo);
+
+        // tbPhoto deve ser considerado como a ActionBar padrão da tela
+
         Toolbar toolbar = findViewById(R.id.tbPhoto);
         setSupportActionBar(toolbar);
 
+        //habilita o botão de voltar na ActionBar
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
 
@@ -47,6 +51,7 @@ public class PhotoActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
         super.onCreateOptionsMenu(menu);
+        //cria um inflador de menu
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.photo_activity_tb,menu);
         return true;
