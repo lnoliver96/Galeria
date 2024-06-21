@@ -25,6 +25,7 @@ import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
@@ -62,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
         });
         Toolbar toolbar = findViewById(R.id.tbMain);
         setSupportActionBar(toolbar);
+
         File dir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
         File[] files = dir.listFiles();
         for(int i = 0; i < files.length;i++) {
@@ -133,7 +135,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data){
         super.onActivityResult(requestCode,resultCode,data);
         if (requestCode == RESULT_TAKE_PICTURE){
-            if (requestCode == Activity.RESULT_OK){
+            if (resultCode == Activity.RESULT_OK){
                 photos.add(currentPhotoPath);
                 mainAdapter.notifyItemInserted(photos.size()-1);
             }

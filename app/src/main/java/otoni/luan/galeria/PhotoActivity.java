@@ -29,11 +29,6 @@ public class PhotoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_photo);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
         Toolbar toolbar = findViewById(R.id.tbPhoto);
         setSupportActionBar(toolbar);
 
@@ -53,7 +48,7 @@ public class PhotoActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu){
         super.onCreateOptionsMenu(menu);
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.main_activity_tb,menu);
+        inflater.inflate(R.menu.photo_activity_tb,menu);
         return true;
     }
 
