@@ -12,7 +12,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 public class MainAdapter extends RecyclerView.Adapter {
+    // instancia para a classe main
     MainActivity mainActivity;
+    //Lista de Strings de caminhos para foto salva na pasta pictures
     List<String> photos;
 
     public MainAdapter(MainActivity mainActivity, List<String> photos){

@@ -65,17 +65,25 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.tbMain);
         setSupportActionBar(toolbar);
 
+
+        //Acessa o dietório "Pictures"
         File dir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        //le a lisa
         File[] files = dir.listFiles();
         for(int i = 0; i < files.length;i++) {
+            //adiciona na lista de fotos
             photos.add(files[i].getAbsolutePath());
         }
+
+        //Cria o mainadapter e seta no recyclerview
         mainAdapter = new MainAdapter(MainActivity.this, photos);
         RecyclerView rvGallery = findViewById(R.id.rvGallery);
         rvGallery.setAdapter(mainAdapter);
 
+        // calcula quantas colunas de fotos cabem na tela
         float w = getResources().getDimension(R.dimen.itemWidth);
         int numberOfColumns = Util.calculateNoOfColumns(MainActivity.this,w);
+        //configura o recyclerView para exibir as fotos em grid respeitando o maximo de colunas da tela
         GridLayoutManager gridLayoutManager = new GridLayoutManager(MainActivity.this, numberOfColumns);
         rvGallery.setLayoutManager(gridLayoutManager);
 
@@ -99,6 +107,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.opCamera) {
+            // caso item da camera for clicado executa o código que dispara camera
             dispatchTakePictureIntent();
             return true;
         }
@@ -147,9 +156,10 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
-
+    //metodo chamado quando o usuario clica na foto
     public void startPhotoActivity(String photoPath) {
         Intent i = new Intent(MainActivity.this,PhotoActivity.class);
+        //passa o caminho da foto para Photo Activity com intent
         i.putExtra("photo_path",photoPath);
         startActivity(i);
     }

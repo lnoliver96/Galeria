@@ -39,10 +39,12 @@ public class PhotoActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
 
+        //Obtem o caminho da foto passada por intent
         Intent i = getIntent();
         photoPath = i.getStringExtra("photo_path");
-
+        //carrega a foto em um Bitmap
         Bitmap bitmap = Util.getBitmap(photoPath);
+        //seta o bitmap no ImageView
         ImageView imPhoto = findViewById(R.id.imPhoto);
         imPhoto.setImageBitmap(bitmap);
 
@@ -60,6 +62,7 @@ public class PhotoActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item){
         if (item.getItemId() == R.id.opShare) {
+            // caso item de compartilhar for clicado executa o código que dispara camera
             sharePhoto();
             return true;
         }
