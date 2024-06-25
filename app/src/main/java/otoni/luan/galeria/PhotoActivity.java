@@ -72,8 +72,11 @@ public class PhotoActivity extends AppCompatActivity {
     private void sharePhoto() {
         // Codigo para compartilhar a foto
         Uri photoUri = FileProvider.getUriForFile(PhotoActivity.this,"otoni.luan.galeria.fileprovider", new File(photoPath));
+        //intent implicito indicando que queremos enviar  algo para  qualque app que seja capaz de aceitar o envio
         Intent i = new Intent(Intent.ACTION_SEND);
+        //indica o arquivo a ser compartilhado
         i.putExtra(Intent.EXTRA_STREAM,photoUri);
+        //executa o intent
         i.setType("image/jpeg");
         startActivity(i);
     }
